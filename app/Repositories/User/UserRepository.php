@@ -21,6 +21,7 @@ class UserRepository implements  UserRepositoryInterface
         return $this->userModel
             ->with('Position')
             ->where('delete','=',0)
+            ->where('id','!=',auth()->user()->id)
             ->where($where)
             ->get();
     }

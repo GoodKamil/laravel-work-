@@ -16,7 +16,7 @@
                             <div class="col-md-6">
                                 <select id="pracownik" type="text" class="form-control @error('id_pracownika') is-invalid @enderror" name="id_pracownika" value="{{ old('id_pracownika') }}">
                                   @foreach($users as $user)
-                                  <option value='{{$user->id}}'>{{$user->name}} {{$user->surname}}</option>
+                                  <option @selected(old('id_pracownika')==$user->id) value='{{$user->id}}'>{{$user->name}} {{$user->surname}}</option>
                                   @endforeach
                                   </select>
                                 <x-error.validator_error name="id_pracownika" :message="$message ?? ''"></x-error.validator_error>

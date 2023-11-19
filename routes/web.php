@@ -23,9 +23,7 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-Route::get('/', function() {
-    return view('welcome');
-})->middleware('auth');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 
 Auth::routes(['verify' => true]);
@@ -40,7 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
         Route::post('editPosition/{position}', [PositionController::class, 'update'])->name('position.edit');
         Route::delete('deletePosition/{position}', [PositionController::class, 'delete']);
         Route::delete('deleteTimeWorkingUser/{id}', [WorkingTimeUserController::class, 'delete']);
-        Route::get('/users/delete/{id}', [UserController::class, 'destroy']);
+        Route::delete('/users/delete/{id}', [UserController::class, 'destroy']);
         Route::get('/createUser', [RegisterController::class, 'index'])->name('user.create');
         Route::post('/createUser', [RegisterController::class, 'store'])->name('user.store');
     });
@@ -54,12 +52,10 @@ Route::middleware(['auth', 'verified'])->group(function() {
         Route::get('users/rcp', [WorkingTimeController::class, 'create']);
         Route::get('users/month', [TimeController::class, 'index']);
         Route::post('/users/montho', [TimeController::class, 'showTime']);
-        Route::get('/users/list', [UserController::class, 'index']);
+        Route::get('/users/list', [UserController::class, 'index'])->name('users.list');
         Route::get('/users/edit/{user}', [UserController::class, 'editview']);
         Route::post('/users/edit/{id}', [UserController::class, 'update']);
         Route::post('users', [WorkingTimeController::class, 'store']);
     });
 
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);

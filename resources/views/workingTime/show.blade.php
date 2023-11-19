@@ -33,6 +33,7 @@
             @endforeach
             </tbody>
         </table>
+        <a href="{{route('workingTime.index')}}"><button type="button" class="btn btn-secondary">Powrót</button></a>
     </div>
     @vite(['resources/js/delete.js','resources/js/datatTable-script.js'])
     <script>

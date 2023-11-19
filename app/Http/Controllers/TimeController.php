@@ -14,7 +14,7 @@ class TimeController extends Controller
 {
     private UserService $userService;
     private WorkingTimeService $workingTimeService;
-    private array $timeWord=[];
+    private int $timeWord=0;
     public function __construct(UserService $userService, WorkingTimeService $workingTimeService)
     {
         $this->userService=$userService;

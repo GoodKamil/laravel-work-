@@ -43,6 +43,7 @@ class WorkingTimeRepository implements WorkingTimeRepositoryInterface
 
     public function getTime(array $params)
     {
+
          $query=$this->workingTimeModel
          ->where('id_pracownika',$params['pracownik'] ?? 0);
          if(isset($params['miesiac']) && $params['miesiac']!='0'){

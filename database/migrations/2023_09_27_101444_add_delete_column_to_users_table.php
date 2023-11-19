@@ -10,7 +10,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-           $table->boolean('delete')->default(0)->after('rola');
+           $table->boolean('delete')->default(0)->after('password');
         });
     }
 

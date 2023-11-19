@@ -7,6 +7,7 @@ use App\Repositories\Position\PositionRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SebastianBergmann\Diff\Exception;
 
 class UserController extends Controller
 {
@@ -24,25 +25,6 @@ class UserController extends Controller
       ]);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-    }
-
     public function update(Request $req, $id)
     {
       DB::table('users')
@@ -53,19 +35,18 @@ class UserController extends Controller
         'id_stanowiska' =>$req -> input('stanowisko'),
         'email' =>$req -> input('email'),
       ]) ;
-      return $this -> index();
+      return redirect('/users/list')->with('success','Pomyślnie edytowano użytkownika');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        DB::table('users')->where('id', $id)->delete();
-        return $this->index();
+        try {
+            DB::table('users')->where('id', $id)->delete();
+            DB::table('czas_pracy')->where('id_pracownika', $id)->delete();
+            return response()->json(['message' => 'Pomyślnie usunięto użytkownika', 'codeText' => 'success']);
+        }catch(Exception $e){
+            return response()->json(['message'=>'Wystąpił problem przy usuwaniu użytkownika','codeText'=>'error']);
+        }
     }
 
     public function editview(User $user)

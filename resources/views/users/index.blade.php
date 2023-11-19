@@ -14,7 +14,7 @@
             </thead>
             <tbody>
             @foreach($users as $user)
-                <tr>
+                <tr id="dtable-{{$user->id}}">
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$user->name}}</td>
                     <td>{{$user->surname}}</td>
@@ -22,7 +22,7 @@
                     <td>{{$user->position->stanowisko}}</td>
                     <td><a href="\users\edit\{{$user->id}}"><i class="fa-solid fa-pen-to-square"></i></a>
                         @can('isBoss')
-                            <a href="\users\delete\{{$user->id}}"><i class="fa-solid fa-trash"></i></a>
+                            <a href="#" data-method="delete" data-value="{{$user->id}}"><i class="fa-solid fa-trash"></i></a>
                         @endcan
                     </td>
 
@@ -32,5 +32,9 @@
             </tbody>
         </table>
     </div>
-    @vite(['resources/js/datatTable-script.js'])
+    @vite(['resources/js/delete.js','resources/js/datatTable-script.js'])
+    <script>
+        const mURL = "{{url('/users/delete')}}";
+        const TITLE='Czy na pewno chcesz usunąć pracownika?'
+    </script>
 @endsection
