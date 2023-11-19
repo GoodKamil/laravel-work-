@@ -6,11 +6,11 @@ namespace App\Enums;
 
 class UserRole
 {
-  const BOSS = 'admin';
-  const MNGR = 'mode';
-  const WRKR = 'user';
+  public const BOSS = 'admin';
+  public const MNGR = 'mode';
+  public const WRKR = 'user';
 
-  const TYPES = [
+  public const TYPES = [
     self::BOSS,
     self::MNGR,
     self::WRKR
